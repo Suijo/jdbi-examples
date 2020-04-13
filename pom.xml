@@ -8,6 +8,13 @@
     <version>1.0</version>
     <developers>
         <developer>
+            <id>penguinvader</id>
+            <name>Balázs Bartha</name>
+            <email>balifej@gmail.com</email>
+            <organization>Faculty of Informatics, University of Debrecen</organization>
+            <organizationUrl>https://www.inf.unideb.hu/</organizationUrl>
+        </developer>
+        <developer>
             <id>jeszy</id>
             <name>Péter Jeszenszky</name>
             <email>jeszenszky.peter@inf.unideb.hu</email>
@@ -64,9 +71,27 @@
             <version>2.1.1</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+                <version>1.18.12.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>delombok</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -75,6 +100,8 @@
                     <compilerArgs>
                         <arg>--enable-preview</arg>
                     </compilerArgs>
+                    <source>13</source>
+                    <target>13</target>
                 </configuration>
             </plugin>
             <plugin>
