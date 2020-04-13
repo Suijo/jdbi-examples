@@ -1,4 +1,4 @@
-package User;
+package user;
 
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
@@ -47,10 +47,12 @@ public class Main {
             System.out.println(dao.findById(1).get());
 
             System.out.println(dao.findByUsername("Andele").get());
-
+            dao.delete("Andele");
             dao.list().stream().forEach(System.out::println);
 
-            dao.delete(Andele);
+
+
+
 
 
 

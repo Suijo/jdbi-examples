@@ -1,4 +1,4 @@
-package User;
+package user;
 
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
@@ -16,7 +16,7 @@ public interface UserDao {
     @SqlUpdate("""
         CREATE TABLE user (
             id IDENTITY PRIMARY KEY,
-            username VARCHAR NOT NULL,
+            username VARCHAR UNIQUE NOT NULL ,
             password VARCHAR,
             name VARCHAR,
             email VARCHAR,
@@ -30,7 +30,7 @@ public interface UserDao {
 
     @SqlUpdate("INSERT INTO user (id,username,password,name,email,gender,dob,enabled) VALUES (:id,:username,:password,:name,:email,:gender,:dob,:enabled)")
     @GetGeneratedKeys
-    long insert(@BindBean User user);
+    long insert(@BindBean User User);
 
     @SqlQuery("SELECT * FROM user WHERE id = :id")
     Optional<User> findById(@Bind("id") long id);
@@ -38,8 +38,8 @@ public interface UserDao {
     @SqlQuery("SELECT * FROM user WHERE username = :username")
     Optional<User> findByUsername(@Bind("username") String username);
 
-    @SqlUpdate("DELETE FROM user WHERE id = :id")
-    void delete(@BindBean User user);
+    @SqlUpdate("DELETE FROM user WHERE username = :username")
+    void delete(@Bind("username") String username);
 
     @SqlQuery("SELECT * FROM user ORDER BY username")
     List<User> list();
